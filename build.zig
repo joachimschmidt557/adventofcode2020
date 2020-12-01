@@ -1,6 +1,8 @@
 const Builder = @import("std").build.Builder;
 
-const days = [_][]const u8{};
+const days = [_][]const u8{
+    "01",
+};
 
 pub fn build(b: *Builder) void {
     // Standard target options allows the person running `zig build` to choose
@@ -14,7 +16,7 @@ pub fn build(b: *Builder) void {
     const mode = b.standardReleaseOptions();
 
     inline for (days) |day| {
-        const exe = b.addExecutable("adventofcode2020", "src/" + day + ".zig");
+        const exe = b.addExecutable(day, "src/" ++ day ++ ".zig");
         exe.setTarget(target);
         exe.setBuildMode(mode);
         exe.install();
@@ -25,7 +27,13 @@ pub fn build(b: *Builder) void {
             run_cmd.addArgs(args);
         }
 
-        const run_step = b.step("run", "Run " ++ day);
+        const run_step = b.step(day, "Run " ++ day);
         run_step.dependOn(&run_cmd.step);
+
+        var tests = b.addTest("src/" ++ day ++ ".zig");
+        tests.setBuildMode(mode);
+
+        const test_step = b.step("test" ++ day, "Run tests for day " ++ day);
+        test_step.dependOn(&tests.step);
     }
 }
