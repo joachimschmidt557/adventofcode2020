@@ -6,7 +6,7 @@ const input_file = "input01.txt";
 fn getThreeNumbers(expense_report: []const u32) [3]u32 {
     return blk: for (expense_report) |x, i| {
         for (expense_report[i + 1 ..]) |y, j| {
-            for (expense_report[j + 1 ..]) |z| {
+            for (expense_report[i + j + 2 ..]) |z| {
                 if (x + y + z == 2020) break :blk [_]u32{ x, y, z };
             }
         }
