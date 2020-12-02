@@ -3,6 +3,7 @@ const Builder = @import("std").build.Builder;
 const days = [_][]const u8{
     "01",
     "01_2",
+    "02",
 };
 
 pub fn build(b: *Builder) void {
