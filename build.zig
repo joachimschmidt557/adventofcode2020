@@ -4,6 +4,7 @@ const days = [_][]const u8{
     "01",
     "01_2",
     "02",
+    "02_2",
 };
 
 pub fn build(b: *Builder) void {
