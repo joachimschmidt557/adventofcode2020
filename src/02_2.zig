@@ -27,11 +27,11 @@ fn parsePasswordPolicy(policy: []const u8) !PasswordPolicy {
 
 test "parsePasswordPolicy" {
     const policy = "1-3 a";
-    const parsed = parsePasswordPolicy(policy);
+    const parsed = try parsePasswordPolicy(policy);
 
-    testing.expectEqual(parsed.pos_1, 1);
-    testing.expectEqual(parsed.pos_2, 3);
-    testing.expectEqual(parsed.char, 'a');
+    try testing.expectEqual(parsed.pos_1, 1);
+    try testing.expectEqual(parsed.pos_2, 3);
+    try testing.expectEqual(parsed.char, 'a');
 }
 
 const Line = struct {
@@ -59,12 +59,12 @@ fn parseLine(line: []const u8) !Line {
 
 test "parseLine" {
     const line = "1-3 a: abcde";
-    const parsed = parseLine(line);
+    const parsed = try parseLine(line);
 
-    testing.expectEqualSlices(u8, parsed.password, "abcde");
-    testing.expectEqual(parsed.policy.pos_1, 1);
-    testing.expectEqual(parsed.policy.pos_2, 3);
-    testing.expectEqual(parsed.policy.char, 'a');
+    try testing.expectEqualSlices(u8, parsed.password, "abcde");
+    try testing.expectEqual(parsed.policy.pos_1, 1);
+    try testing.expectEqual(parsed.policy.pos_2, 3);
+    try testing.expectEqual(parsed.policy.char, 'a');
 }
 
 pub fn main() !void {

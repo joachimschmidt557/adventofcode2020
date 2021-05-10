@@ -56,10 +56,10 @@ const Seat = struct {
 };
 
 test "from description" {
-    testing.expectEqual(Seat{ .row = 44, .column = 5 }, try Seat.fromDescription("FBFBBFFRLR"));
-    testing.expectEqual(Seat{ .row = 70, .column = 7 }, try Seat.fromDescription("BFFFBBFRRR"));
-    testing.expectEqual(Seat{ .row = 14, .column = 7 }, try Seat.fromDescription("FFFBBBFRRR"));
-    testing.expectEqual(Seat{ .row = 102, .column = 4 }, try Seat.fromDescription("BBFFBBFRLL"));
+    try testing.expectEqual(Seat{ .row = 44, .column = 5 }, try Seat.fromDescription("FBFBBFFRLR"));
+    try testing.expectEqual(Seat{ .row = 70, .column = 7 }, try Seat.fromDescription("BFFFBBFRRR"));
+    try testing.expectEqual(Seat{ .row = 14, .column = 7 }, try Seat.fromDescription("FFFBBBFRRR"));
+    try testing.expectEqual(Seat{ .row = 102, .column = 4 }, try Seat.fromDescription("BBFFBBFRLL"));
 }
 
 pub fn main() !void {

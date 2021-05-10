@@ -18,7 +18,7 @@ fn parseOneDeclaration(line: []const u8) u26 {
 }
 
 test "parse one declaration" {
-    testing.expectEqual(@as(u26, 0b111), parseOneDeclaration("abc"));
+    try testing.expectEqual(@as(u26, 0b111), parseOneDeclaration("abc"));
 }
 
 fn nextDeclaration(reader: anytype) !?u26 {
@@ -56,12 +56,12 @@ test "iterate over declarations" {
     var fbs = std.io.fixedBufferStream(example);
     const reader = fbs.reader();
 
-    testing.expectEqual(@as(?u26, 0b111), try nextDeclaration(reader));
-    testing.expectEqual(@as(?u26, 0b000), try nextDeclaration(reader));
-    testing.expectEqual(@as(?u26, 0b001), try nextDeclaration(reader));
-    testing.expectEqual(@as(?u26, 0b001), try nextDeclaration(reader));
-    testing.expectEqual(@as(?u26, 0b010), try nextDeclaration(reader));
-    testing.expectEqual(@as(?u26, null), try nextDeclaration(reader));
+    try testing.expectEqual(@as(?u26, 0b111), try nextDeclaration(reader));
+    try testing.expectEqual(@as(?u26, 0b000), try nextDeclaration(reader));
+    try testing.expectEqual(@as(?u26, 0b001), try nextDeclaration(reader));
+    try testing.expectEqual(@as(?u26, 0b001), try nextDeclaration(reader));
+    try testing.expectEqual(@as(?u26, 0b010), try nextDeclaration(reader));
+    try testing.expectEqual(@as(?u26, null), try nextDeclaration(reader));
 }
 
 pub fn main() !void {

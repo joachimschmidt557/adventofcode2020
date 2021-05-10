@@ -100,7 +100,7 @@ test "bytecode compiler" {
     const bytecode = try compile(allocator, reader, .{});
     defer allocator.free(bytecode);
 
-    testing.expectEqualSlices(u8, &[_]u8{
+    try testing.expectEqualSlices(u8, &[_]u8{
         0, // nop
         1, 1, 0, // acc +1
         2, 3, 0, // jmp +1
@@ -120,7 +120,7 @@ test "bytecode compiler bounds check" {
 
     var fbs = std.io.fixedBufferStream(assembly);
     const reader = fbs.reader();
-    testing.expectError(error.JumpOutOfBounds, compile(allocator, reader, .{}));
+    try testing.expectError(error.JumpOutOfBounds, compile(allocator, reader, .{}));
 }
 
 const Vm = struct {
@@ -179,7 +179,7 @@ test "infinite loop detector" {
 
     var vm = Vm{ .bytecode = bytecode };
     try runUntilInfiniteLoop(allocator, &vm);
-    testing.expectEqual(@as(i32, 5), vm.accumulator);
+    try testing.expectEqual(@as(i32, 5), vm.accumulator);
 }
 
 pub fn main() !void {

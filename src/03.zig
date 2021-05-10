@@ -50,8 +50,8 @@ test "parse" {
     const parsed = try parseMap(allocator, map);
     defer freeMap(allocator, parsed);
 
-    testing.expectEqual(parsed[0][0], .open);
-    testing.expectEqual(parsed[0][2], .tree);
+    try testing.expectEqual(parsed[0][0], .open);
+    try testing.expectEqual(parsed[0][2], .tree);
 }
 
 fn countTrees(map: []const []const Square) u32 {
@@ -89,7 +89,7 @@ test "count trees" {
     const parsed = try parseMap(allocator, map);
     defer freeMap(allocator, parsed);
 
-    testing.expectEqual(@as(u32, 7), countTrees(parsed));
+    try testing.expectEqual(@as(u32, 7), countTrees(parsed));
 }
 
 pub fn main() !void {

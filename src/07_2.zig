@@ -78,12 +78,12 @@ test "parse rules" {
     var parsed = try parseRules(allocator, reader);
     defer freeRules(allocator, &parsed);
 
-    testing.expectEqualSlices(u8, (parsed.get("light red").?)[0].color, "bright white");
-    testing.expectEqual(@as(u32, 1), (parsed.get("light red").?)[0].amount);
-    testing.expectEqualSlices(u8, (parsed.get("light red").?)[1].color, "muted yellow");
-    testing.expectEqual(@as(u32, 2), (parsed.get("light red").?)[1].amount);
-    testing.expectEqualSlices(u8, (parsed.get("bright white").?)[0].color, "shiny gold");
-    testing.expectEqual(@as(usize, 0), (parsed.get("faded blue").?).len);
+    try testing.expectEqualSlices(u8, (parsed.get("light red").?)[0].color, "bright white");
+    try testing.expectEqual(@as(u32, 1), (parsed.get("light red").?)[0].amount);
+    try testing.expectEqualSlices(u8, (parsed.get("light red").?)[1].color, "muted yellow");
+    try testing.expectEqual(@as(u32, 2), (parsed.get("light red").?)[1].amount);
+    try testing.expectEqualSlices(u8, (parsed.get("bright white").?)[0].color, "shiny gold");
+    try testing.expectEqual(@as(usize, 0), (parsed.get("faded blue").?).len);
 }
 
 fn countInnerBags(rules: Rules, target_color: []const u8) u32 {
@@ -116,7 +116,7 @@ test "count inner bags" {
     var parsed = try parseRules(allocator, reader);
     defer freeRules(allocator, &parsed);
 
-    testing.expectEqual(@as(u32, 126), countInnerBags(parsed, "shiny gold"));
+    try testing.expectEqual(@as(u32, 126), countInnerBags(parsed, "shiny gold"));
 }
 
 pub fn main() !void {

@@ -40,7 +40,7 @@ test "is valid" {
     try passport.set("cid", "147");
     try passport.set("hgt", "183cm");
 
-    testing.expect(isValid(passport));
+    try testing.expect(isValid(passport));
 }
 
 fn parsePassports(allocator: *Allocator, str: []const u8) ![]BufMap {
@@ -93,10 +93,10 @@ test "parse passports" {
     const parsed = try parsePassports(allocator, str);
     defer freePassports(allocator, parsed);
 
-    testing.expectEqual(@as(usize, 4), parsed.len);
-    testing.expectEqualSlices(u8, "gry", parsed[0].get("ecl").?);
-    testing.expectEqualSlices(u8, "1931", parsed[2].get("byr").?);
-    testing.expectEqual(@as(?[]const u8, null), parsed[0].get("asdf"));
+    try testing.expectEqual(@as(usize, 4), parsed.len);
+    try testing.expectEqualSlices(u8, "gry", parsed[0].get("ecl").?);
+    try testing.expectEqualSlices(u8, "1931", parsed[2].get("byr").?);
+    try testing.expectEqual(@as(?[]const u8, null), parsed[0].get("asdf"));
 }
 
 pub fn main() !void {

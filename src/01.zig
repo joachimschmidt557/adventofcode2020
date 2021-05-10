@@ -22,8 +22,8 @@ test "getTwoNumbers" {
     };
 
     const two_numbers = getTwoNumbers(&expense_report);
-    testing.expectEqual([_]u32{ 1721, 299 }, two_numbers);
-    testing.expectEqual(@as(u32, 514579), two_numbers[0] * two_numbers[1]);
+    try testing.expectEqual([_]u32{ 1721, 299 }, two_numbers);
+    try testing.expectEqual(@as(u32, 514579), two_numbers[0] * two_numbers[1]);
 }
 
 pub fn main() !void {

@@ -24,8 +24,8 @@ test "getThreeNumbers" {
     };
 
     const three_numbers = getThreeNumbers(&expense_report);
-    testing.expectEqual([_]u32{ 979, 366, 675 }, three_numbers);
-    testing.expectEqual(@as(u32, 241861950), three_numbers[0] * three_numbers[1] * three_numbers[2]);
+    try testing.expectEqual([_]u32{ 979, 366, 675 }, three_numbers);
+    try testing.expectEqual(@as(u32, 241861950), three_numbers[0] * three_numbers[1] * three_numbers[2]);
 }
 
 pub fn main() !void {

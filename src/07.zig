@@ -68,10 +68,10 @@ test "parse rules" {
     var parsed = try parseRules(allocator, reader);
     defer freeRules(allocator, &parsed);
 
-    testing.expectEqualSlices(u8, (parsed.get("light red").?)[0], "bright white");
-    testing.expectEqualSlices(u8, (parsed.get("light red").?)[1], "muted yellow");
-    testing.expectEqualSlices(u8, (parsed.get("bright white").?)[0], "shiny gold");
-    testing.expectEqual(@as(usize, 0), (parsed.get("faded blue").?).len);
+    try testing.expectEqualSlices(u8, (parsed.get("light red").?)[0], "bright white");
+    try testing.expectEqualSlices(u8, (parsed.get("light red").?)[1], "muted yellow");
+    try testing.expectEqualSlices(u8, (parsed.get("bright white").?)[0], "shiny gold");
+    try testing.expectEqual(@as(usize, 0), (parsed.get("faded blue").?).len);
 }
 
 fn canHold(rules: Rules, target_color: []const u8, color: []const u8) bool {
@@ -112,7 +112,7 @@ test "count valid bag colors" {
     var parsed = try parseRules(allocator, reader);
     defer freeRules(allocator, &parsed);
 
-    testing.expectEqual(@as(u32, 4), countValidBagColors(parsed, "shiny gold"));
+    try testing.expectEqual(@as(u32, 4), countValidBagColors(parsed, "shiny gold"));
 }
 
 pub fn main() !void {

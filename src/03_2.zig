@@ -50,8 +50,8 @@ test "parse" {
     const parsed = try parseMap(allocator, map);
     defer freeMap(allocator, parsed);
 
-    testing.expectEqual(parsed[0][0], .open);
-    testing.expectEqual(parsed[0][2], .tree);
+    try testing.expectEqual(parsed[0][0], .open);
+    try testing.expectEqual(parsed[0][2], .tree);
 }
 
 const Slope = struct {
@@ -94,23 +94,23 @@ test "count trees" {
     const parsed = try parseMap(allocator, map);
     defer freeMap(allocator, parsed);
 
-    testing.expectEqual(@as(u32, 7), countTrees(parsed, Slope{
+    try testing.expectEqual(@as(u32, 7), countTrees(parsed, Slope{
         .right = 3,
         .down = 1,
     }));
-    testing.expectEqual(@as(u32, 2), countTrees(parsed, Slope{
+    try testing.expectEqual(@as(u32, 2), countTrees(parsed, Slope{
         .right = 1,
         .down = 1,
     }));
-    testing.expectEqual(@as(u32, 3), countTrees(parsed, Slope{
+    try testing.expectEqual(@as(u32, 3), countTrees(parsed, Slope{
         .right = 5,
         .down = 1,
     }));
-    testing.expectEqual(@as(u32, 4), countTrees(parsed, Slope{
+    try testing.expectEqual(@as(u32, 4), countTrees(parsed, Slope{
         .right = 7,
         .down = 1,
     }));
-    testing.expectEqual(@as(u32, 2), countTrees(parsed, Slope{
+    try testing.expectEqual(@as(u32, 2), countTrees(parsed, Slope{
         .right = 1,
         .down = 2,
     }));
